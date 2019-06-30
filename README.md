@@ -1,3 +1,10 @@
+こちらを参考にカスタマイズ
+https://qiita.com/y_kawase/items/8f1b5a303400a09c4923
+https://animel.f-arts.work/info
+
+material-ui
+https://material-ui.com/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

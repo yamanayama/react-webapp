@@ -8,7 +8,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 // Route関連
 import { Link } from 'react-router-dom'
 
-const ResponsiveDrawerListItem = ({to, onClick, icon, text}) => (
+/*============================================================ */
+
+const ResponsiveDrawerListItem = ({ to, onClick, icon, text }) => (
+  //ResponsiveDrawerからpropsとして受け取る
   <ListItem button component={Link} to={to} onClick={onClick}>
     <ListItemIcon>
       {icon}
@@ -18,6 +21,8 @@ const ResponsiveDrawerListItem = ({to, onClick, icon, text}) => (
 );
 
 ResponsiveDrawerListItem.propTypes = {
+  //Propsの型が書いてあって、その型の通りにデータが渡されているのかをチェックしてくれる
+  //https://codezine.jp/article/detail/10729
   to: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   icon: PropTypes.object.isRequired,

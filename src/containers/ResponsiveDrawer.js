@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
 
-// Material-UI
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import MenuIcon from '@material-ui/core/MenuIcon';
+import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Divider from '@material-ui/core/Divider';
+import Hidden from '@material-ui/core/Hidden';
 
 // Material-UI
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -26,6 +24,11 @@ import { Link } from 'react-router-dom';
 
 // コンテナの準備
 // import ShareDialog from '../containers/ShareDialog';
+
+// コンポーネントの準備
+import ResponsiveDrawerListItem from '../components/ResponsiveDrawerListItem';
+
+/*============================================================ */
 
 // styles を定義
 // theme を使わない場合は関数ではなく object でもよい
@@ -41,9 +44,9 @@ const styles = theme => ({
       flexShrink: 0,
     },
   },
-  appBar: {
+  appBar: { 
     marginLeft: drawerWidth,
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('sm')]: {//ブレークポイントで制御
       width: `calc(100% - ${drawerWidth}px)`,
     },
   },
@@ -62,6 +65,7 @@ const styles = theme => ({
     padding: theme.spacing(3),
   },
 
+  // ヘッダーロゴ
   headerLogo: {
     display: 'flex',
     height: 50,
@@ -89,48 +93,76 @@ class ResponsiveDrawer extends Component {
     console.log(this.bandleCloseNav);
   }
   //shareボタン
-  bandleOpenSharebtn = () => {
-    this.setState({ isOpenSharebtn: true });
-    console.log(this.bandleOpenSharebtn);
-  }
-  bandleCloseSharebtn = () => {
-    this.setState({ isCloseSharebtn: true });
-    console.log(this.bandleCloseSharebtn);
+  // shareDialogToggle = () => {
+  //   this.setState({ isOpenSharebtn: true });
+  //   console.log(this.shareDialogToggle);
+  // }
+  // bandleCloseSharebtn = () => {
+  //   this.setState({ isCloseSharebtn: true });
+  //   console.log(this.bandleCloseSharebtn);
+  // }
+
+  // シェアボタン挙動
+  shareDialogToggle = () => {
+    this.setState({ shareDialogOpen: !this.state.shareDialogOpen });
   }
 
   render() {
-    const { classes, title } = this.props;
+    const { classes, theme, container } = this.props;
 
     const drawer = (
       <div>
         <div className={classes.toolbar} />
         <List>
-          {/*ここにListitemへの引数を書く*/}
+          <ResponsiveDrawerListItem
+            to='/'
+            onClick = {this.bandleCloseNav}
+            icon = {<InfoIcon/>}
+            text='トップページ'
+          />
         </List>
         <Divider />
+       <List>
+          <ResponsiveDrawerListItem
+            to='/'
+            onClick = {this.bandleCloseNav}
+            icon = {<HomeIcon/>}
+            text='トップページ'
+          />
+        </List>
+        <Divider/>
         <List>
-
+          <ResponsiveDrawerListItem
+            to='/'
+            onClick = {this.bandleCloseNav}
+            icon={<SettingsIcon/>}
+            text='設定'
+          />
         </List>
       </div>
     );
-
+    
+    {/*header記述 */ }
     return (
       <div className={classes.root}>
-        <CssBaseline />
+        <CssBaseline /> {/*The rest of your application */ }
         <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
+          <Toolbar className = {classes.toolBar}
+          variant = "dense" >
             <IconButton
               color="inherit"
               aria-label="Open drawer"
               edge="start"
-              onClick={handleDrawerToggle}
+              onClick={this.bandleOpenNav}//thisで取らないと動かない
               className={classes.menuButton}
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
-              Responsive drawer
-          </Typography>
+            <Link to="/">
+              <Typography variant="h6" noWrap>
+                Responsive drawer
+              </Typography>
+            </Link>
           </Toolbar>
         </AppBar>
         <nav className={classes.drawer} aria-label="Mailbox folders">
@@ -140,8 +172,8 @@ class ResponsiveDrawer extends Component {
               container={container}
               variant="temporary"
               anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-              open={mobileOpen}
-              onClose={handleDrawerToggle}
+              open={this.isOpenNav} //thisで取らないと動かない
+              onClose={this.bandleCloseNav}//thisで取らないと動かない
               classes={{
                 paper: classes.drawerPaper,
               }}
@@ -173,6 +205,8 @@ class ResponsiveDrawer extends Component {
 }
 
 ResponsiveDrawer.propTypes = {
+  //Propsの型が書いてあって、その型の通りにデータが渡されているのかをチェックしてくれる
+  //https://codezine.jp/article/detail/10729
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
   container: PropTypes.object,

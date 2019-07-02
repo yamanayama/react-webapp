@@ -12,25 +12,21 @@ import blue from '@material-ui/core/colors/blue';
 
 // Redux関連
 import { createStore, applyMiddleware, compose } from 'redux';
-import { Provider } from 'react-redux';
-import reducers from './reducers';
+// import { Provider } from 'react-redux';
+// import reducers from './reducers';
 
 // Router関連
 import { BrowserRouter as Router } from 'react-router-dom';
 
 // Redux-Thunk関連（非同期データ取得用）
-import thunk from 'redux-thunk';
+// import thunk from 'redux-thunk';
 
+/*============================================================ */
 
 // Redux設定
 // const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // Chromeのデバック用
-const composeEnhancers = compose; // 本番用
-const store = createStore(
-  reducers,
-  composeEnhancers(
-    applyMiddleware(thunk),
-  )
-);
+// const composeEnhancers = compose; // 本番用
+
 
 // Material-UIテーマカスタマイズ
 const theme = createMuiTheme({
@@ -43,12 +39,10 @@ const theme = createMuiTheme({
 
 
 ReactDOM.render(
-  <Provider store={store}>
     <MuiThemeProvider theme={theme} >
       <Router>{/* このRouter（もしくはBrowserRouter）で囲む */}
         <App />
       </Router>
     </MuiThemeProvider>
-  </Provider>
   , document.getElementById('root'));
 serviceWorker();

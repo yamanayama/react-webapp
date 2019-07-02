@@ -9,7 +9,7 @@ import RouteRelatedBottomNavigation from './containers/RouteRelatedBottomNavigat
 import Settings from './containers/Settings';
 
 // コンポーネント読み込み
-import WrapMainContent from './components/WrapMainContent';
+// import WrapMainContent from './components/WrapMainContent';
 
 // 共通スタイル読み込み
 import './App.css';
@@ -17,6 +17,7 @@ import './App.css';
 // Route関連
 import { Route, Switch } from 'react-router-dom';
 
+/*============================================================ */
 
 // 不明なRouteは全てNotFound
 const NotFound = () => {
@@ -35,16 +36,27 @@ class App extends Component {
           {/* URLでマッチさせたい要素を書いていく */}
           {/* component={Home}とかでもOK。今回はWrapMainContentでラッパーしている。 */}
           {/* exactを入れることで厳密なURL比較が可能に */}
-          <Route exact path="/" component={WrapMainContent(Home)} />} />
-            <Route exact path="/info" component={WrapMainContent(Info)} />
-          <Route exact path="/settings" component={WrapMainContent(Settings)} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/info" component={Info} />
+          <Route exact path="/settings" component={Settings} />
           {/* URLヒットしないときはNot Found画面を表示する */}
-          <Route component={WrapMainContent(NotFound)} />
+          <Route component={NotFound} />
         </Switch>
       </div>
     );
   }
 }
+
+/*> つまり、基本的にピュアなcomponentはfunctionで作っていき、state管理が必要な場合にのみclassに格上げしていくというように作っていけばよい
+
+はい。その方針で問題ないかと思います。
+
+たとえば状態管理に redux を使った SPA では、ある画面の画面全体をくくる<div />は、おそらくclass で作ることになると思いますが、
+その画面で state を持つコンポーネントが、全体をくくるそれ1つだけだと、小さい画面要素へのprops 渡しが煩雑すぎるということになれば、
+どこか適切な領域に state を持たせる、という算段になるかと思います。
+なので、
+
+なるべくピュアなcomponentで作るようにするには、画面上のどこを state を持った描画要素として見るか、という見極めが肝になってくる */
 
 // React-Router情報取得
 export default App;

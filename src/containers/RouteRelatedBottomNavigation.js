@@ -12,9 +12,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import HomeIcon from '@material-ui/icons/Home';
 
 // Route関連
-import { Link } from 'react-router-dom';
-import { ContentAddCircleOutline } from 'material-ui/svg-icons';
-
+import { Link, withRouter } from 'react-router-dom';
 /*============================================================ */
 
 // styles を定義
@@ -32,26 +30,37 @@ const styles = theme => ({
 });
 
 class RouteRelatedBottomNavigation extends Component {
-  constructor() {
-    super();
-  }
+
+  buttons_info = [
+    { label: 'トップページ', icon: <HomeIcon />, link_to: '/' },
+    { label: 'Animelとは', icon: <InfoIcon />, link_to: '/info' },
+  ];
+
+  buttons = this.buttons_info.map((button_info, index) => {
+    return (
+      <BottomNavigationAction
+        value={button_info.link_to}
+        label={button_info.label}
+        className={this.props.classes.button}
+        icon={button_info.icon}
+        component={Link}
+        to={button_info.link_to}
+      />
+    );
+  })
   
   render() {
-    const { classes} = this.props;
-    const [value, setValue] = React.useState(0);
+    const {classes} = this.props;
 
     return (
-      <BottomNavigation
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-        showLabels
-        className={classes.root}
-      >
-        <BottomNavigationAction label="Home" icon={<HomeIcon />} />
-        <BottomNavigationAction label="Info" icon={<InfoIcon />} />
-      </BottomNavigation>
+      <div className={classes.wrapper}>
+        <BottomNavigation
+          value={this.props.location.pathname}
+          showLabels
+          className={classes.root}
+          children={this.buttons}
+        />
+      </div>
     );
   } 
 }
@@ -63,4 +72,6 @@ RouteRelatedBottomNavigation.propTypes = {
 };
 
 // Material-uiのテーマ設定＋Redux設定
-export default withStyles(styles, { withTheme: true })(RouteRelatedBottomNavigation);
+export default withRouter(
+  withStyles(styles, { withTheme: true })(RouteRelatedBottomNavigation)
+);

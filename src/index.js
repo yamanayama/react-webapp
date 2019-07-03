@@ -2,12 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
-
+import { unregister } from './serviceWorker';//有効だと動かない
 
 // Material-UI
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-import pink from '@material-ui/core/colors/pink';
+import grey from '@material-ui/core/colors/grey';
 import blue from '@material-ui/core/colors/blue';
 
 // Redux関連
@@ -32,7 +31,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 const theme = createMuiTheme({
   palette: {
     type: 'light', // light or dark
-    primary: pink, // primaryのカラー
+    primary: grey, // primaryのカラー
     secondary: blue, // secondaryのカラー
   },
 });
@@ -45,4 +44,4 @@ ReactDOM.render(
       </Router>
     </MuiThemeProvider>
   , document.getElementById('root'));
-serviceWorker();
+unregister();

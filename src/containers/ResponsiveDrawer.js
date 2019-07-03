@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
@@ -6,7 +6,7 @@ import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
-import MenuIcon from '@material-ui/core/MenuIcon';
+import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -46,6 +46,7 @@ const styles = theme => ({
   },
   appBar: { 
     marginLeft: drawerWidth,
+    background: '#111',
     [theme.breakpoints.up('sm')]: {//ブレークポイントで制御
       width: `calc(100% - ${drawerWidth}px)`,
     },
@@ -68,11 +69,12 @@ const styles = theme => ({
   // ヘッダーロゴ
   headerLogo: {
     display: 'flex',
-    height: 50,
+    textAlign: 'center',
+    flexDirection:'center',
   },
 });
 
-class ResponsiveDrawer extends Component {
+class ResponsiveDrawer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -88,8 +90,13 @@ class ResponsiveDrawer extends Component {
     });
     console.log(this.bandleOpenNav);
   }
+  bandleOpenNav = () => {
+    this.setState({ isOpenNav: true });
+    console.log(this.bandleCloseNav);
+  }
+
   bandleCloseNav = () => {
-    this.setState({ isCloseNav: true });
+    this.setState({ isOpenNav: false });
     console.log(this.bandleCloseNav);
   }
   //shareボタン
@@ -115,10 +122,10 @@ class ResponsiveDrawer extends Component {
         <div className={classes.toolbar} />
         <List>
           <ResponsiveDrawerListItem
-            to='/'
+            to='/info'
             onClick = {this.bandleCloseNav}
             icon = {<InfoIcon/>}
-            text='トップページ'
+            text='○○とは'
           />
         </List>
         <Divider />
@@ -133,7 +140,7 @@ class ResponsiveDrawer extends Component {
         <Divider/>
         <List>
           <ResponsiveDrawerListItem
-            to='/'
+            to='/settings'
             onClick = {this.bandleCloseNav}
             icon={<SettingsIcon/>}
             text='設定'
@@ -159,8 +166,8 @@ class ResponsiveDrawer extends Component {
               <MenuIcon />
             </IconButton>
             <Link to="/">
-              <Typography variant="h6" noWrap>
-                Responsive drawer
+              <Typography variant="h6" className={classes.headerLogo} noWrap>
+                タイトルタイトル
               </Typography>
             </Link>
           </Toolbar>

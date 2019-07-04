@@ -17,6 +17,7 @@ import Hidden from '@material-ui/core/Hidden';
 import SettingsIcon from '@material-ui/icons/Settings';
 import InfoIcon from '@material-ui/icons/Info';
 import HomeIcon from '@material-ui/icons/Home';
+import PhotoLibrarySharpIccon from '@material-ui/icons/PhotoLibrarySharp';
 import ShareIcon from '@material-ui/icons/Share';
 
 // Route関連
@@ -53,6 +54,7 @@ const styles = theme => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    color:'#fff',
     [theme.breakpoints.up('sm')]: {
       display: 'none',
     },
@@ -125,7 +127,7 @@ class ResponsiveDrawer extends React.Component {
             to='/info'
             onClick = {this.bandleCloseNav}
             icon = {<InfoIcon/>}
-            text='○○とは'
+            text='aaa'
           />
         </List>
         <Divider />
@@ -137,7 +139,14 @@ class ResponsiveDrawer extends React.Component {
             text='トップページ'
           />
         </List>
-        <Divider/>
+        <List>
+          <ResponsiveDrawerListItem
+            to='/gallery'
+            onClick={this.bandleCloseNav}
+            icon={<PhotoLibrarySharpIccon />}
+            text='フォトギャラリー'
+          />
+        </List>
         <List>
           <ResponsiveDrawerListItem
             to='/settings'

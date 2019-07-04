@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@material-ui/styles';
+import Container from '@material-ui/core/Container';
+import clsx from 'clsx';
+import Typography from '@material-ui/core/Typography';
 
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import Button from '../components/Button';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -20,11 +23,44 @@ import { Link } from 'react-router-dom';
 
 // styles を定義
 // theme を使わない場合は関数ではなく object でもよい
+const backgroundImage =
+  'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400&q=80';
 
 const styles = theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
+  },
+  container: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(14),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  backdrop: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    backgroundColor: theme.palette.common.black,
+    opacity: 0.5,
+    zIndex: -1,
+  },
+  background: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    zIndex: -2,
+  },
+  arrowDown: {
+    position: 'absolute',
+    bottom: theme.spacing(4),
   },
   formControl: {
     margin: theme.spacing(1),
@@ -35,7 +71,6 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing(1),
-
   },
   input: {
     display: 'none',
@@ -48,16 +83,61 @@ const styles = theme => ({
   },
 });
 
-const MyButton = styled(Button)({
-  background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-  border: 0,
-  borderRadius: 3,
-  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-  color: 'white',
-  height: 48,
-  padding: '0 30px',
-});
+//HeroImg
+class HeroArea extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {  }
+  }
+  render() { 
+    const classes = this.props;
 
+    return (
+      <section className={classes.root}>
+        <Container className={classes.container}>
+          <img
+            src="/static/themes/onepirate/productHeroWonder.png"
+            alt="wonder"
+            width="147"
+            height="80"
+          />
+          <div className={classes.background}>
+            {/* Increase the network loading priority of the background image. */}
+            <img style={{ display: 'none' }} src={backgroundImage} alt="" />
+            <Typography color="inherit" align="center" variant="h2" marked="center">
+              hogehoge
+      </Typography>
+            <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
+              hogehogepiyopiyohogehogepiyopiyohogehogepiyopiyohogehogepiyopiyohogehogepiyopiyo
+      </Typography>
+            <Button
+              color="secondary"
+              variant="contained"
+              size="large"
+              className={classes.button}
+              component="a"
+              href="/premium-themes/onepirate/sign-up/"
+            >
+              Register
+      </Button>
+            <Typography variant="body2" color="inherit" className={classes.more}>
+              Discover the experience
+      </Typography>
+          </div>
+          <div className={classes.backdrop} />
+          <div className={clsx(classes.background)} />
+          <img
+            className={classes.arrowDown}
+            src="/static/themes/onepirate/productHeroArrowDown.png"
+            height="16"
+            width="12"
+            alt="arrow down"
+          />
+        </Container>
+      </section>
+    );
+  }
+}
 
 class Home extends React.Component {
   render() {
@@ -75,6 +155,7 @@ class Home extends React.Component {
 
   return (
     <div className={classes.root}>
+      <HeroArea/>
       <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel htmlFor="outlined-age-native-simple">
           期間
@@ -91,9 +172,9 @@ class Home extends React.Component {
         </Select>
       </FormControl>
 
-      <MyButton variant="contained" color="primary" className={classes.button}>
+      <Button variant="contained" color="primary" className={classes.button}>
         検索する
-      </MyButton>
+      </Button>
     </div>
   );
   }
@@ -104,6 +185,13 @@ Home.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
 };
+
+HeroArea.propTypes = {
+  backgroundClassName: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  classes: PropTypes.object.isRequired,
+};
+
 
 // Material-uiのテーマ設定＋Redux設定
 export default withStyles(styles, { withTheme: true })(Home);

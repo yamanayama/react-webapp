@@ -118,6 +118,7 @@ class ResponsiveDrawer extends React.Component {
 
   render() {
     const { classes, theme, container } = this.props;
+    const { isOpenNav } = this.state;
 
     const drawer = (
       <div>
@@ -130,7 +131,6 @@ class ResponsiveDrawer extends React.Component {
             text='aaa'
           />
         </List>
-        <Divider />
        <List>
           <ResponsiveDrawerListItem
             to='/'

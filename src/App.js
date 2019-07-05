@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 // コンテナ読み込み
 import Home from './containers/Home';
 import Info from './containers/Info';
+import Gallery from './containers/Gallery';
 import ResponsiveDrawer from './containers/ResponsiveDrawer';
 import RouteRelatedBottomNavigation from './containers/RouteRelatedBottomNavigation';
 import Settings from './containers/Settings';
@@ -38,6 +39,7 @@ class App extends Component {
             {/* exactを入れることで厳密なURL比較が可能に */}
             <Route exact path="/" component={Home} />
             <Route exact path="/info" component={Info} />
+            <Route exact path="/gallery" component={Gallery} />
             <Route exact path="/settings" component={Settings} />
             {/* URLヒットしないときはNot Found画面を表示する */}
             <Route component={NotFound} />

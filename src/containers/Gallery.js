@@ -1,11 +1,15 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+
+import { withStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
-import tileData from './tileData';
+import image from '../asetts/images/alex-pavlou-2UBwWeXlQKg-unsplash.jpg';
+
+// import tileData from '../components/tileData';
 
 const styles = theme => ({
   root: {
@@ -31,27 +35,18 @@ const styles = theme => ({
   },
 });
 
-/**
- * The example data is structured as follows:
- *
- * import image from 'path/to/image.jpg';
- * [etc...]
- *
- * const tileData = [
- *   {
- *     img: image,
- *     title: 'Image',
- *     author: 'author',
- *     featured: true,
- *   },
- *   {
- *     [etc...]
- *   },
- * ];
- */
 
+  const tileData = [
+   {
+    img: image,
+     title: 'Image',
+     author: 'author',
+      featured: true,
+      col: 2,
+    },
+ ];
 
- class Gallery extends Component {
+class Gallery extends React.Component {
 
    render() { 
      const { classes } = this.props;
@@ -61,7 +56,7 @@ const styles = theme => ({
          <GridList cellHeight={200} spacing={1} className={classes.gridList}>
            {tileData.map(tile => (
              <GridListTile key={tile.img} cols={tile.featured ? 2 : 1} rows={tile.featured ? 2 : 1}>
-               <img src={tile.img} alt={tile.title} />
+               <img src={`../asetts/images/${tile.img}`} alt={tile.title} />
                <GridListTileBar
                  title={tile.title}
                  titlePosition="top"
@@ -81,5 +76,11 @@ const styles = theme => ({
    }
  }
   
+// Material-ui関連
+Gallery.propTypes = {
+  classes: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired,
+};
+
 // Material-uiのテーマ設定
 export default withStyles(styles, { withTheme: true })(Gallery);

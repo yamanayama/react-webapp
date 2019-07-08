@@ -87,9 +87,9 @@ const styles = theme => ({
 class HeroArea extends Component {
   constructor(props) {
     super(props);
-    this.state = {  }
+    this.state = {};
   }
-  render() { 
+  render() {
     const classes = this.props;
 
     return (
@@ -150,33 +150,33 @@ class Home extends React.Component {
     const periods = ['20期下期(2019)', '21期上期(2019)', '21期下期(2020)'];
 
     const handleChange = event => { //あやしい
-      this.setState({[event.target.name]: event.target.value });
+      this.setState({ [event.target.name]: event.target.value });
     };
 
-  return (
-    <div className={classes.root}>
-      <HeroArea/>
-      <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel htmlFor="outlined-age-native-simple">
-          期間
+    return (
+      <div className={classes.root}>
+        <HeroArea />
+        <FormControl variant="outlined" className={classes.formControl}>
+          <InputLabel htmlFor="outlined-age-native-simple">
+            期間
         </InputLabel>
-        <Select
-          native
-          value={this.state.period}
-          onChange={handleChange}
-          input={
-            <OutlinedInput name="period" id="outlined-age-native-simple" />
-          }
-        >
-        {periods}
-        </Select>
-      </FormControl>
+          <Select
+            native
+            value={this.state.period}
+            onChange={handleChange}
+            input={
+              <OutlinedInput name="period" id="outlined-age-native-simple" />
+            }
+          >
+            {periods}
+          </Select>
+        </FormControl>
 
-      <Button variant="contained" color="primary" className={classes.button}>
-        検索する
+        <Button variant="contained" color="primary" className={classes.button}>
+          検索する
       </Button>
-    </div>
-  );
+      </div>
+    );
   }
 }
 

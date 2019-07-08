@@ -45,16 +45,24 @@ const styles = theme => ({
       flexShrink: 0,
     },
   },
-  appBar: { 
+  appBar: {
     marginLeft: drawerWidth,
-    background: '#111',
+    background: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
     [theme.breakpoints.up('sm')]: {//ブレークポイントで制御
       width: `calc(100% - ${drawerWidth}px)`,
     },
+    ':hover': {
+      background: '#333',
+    },
+    'a': {
+      color: '#333',
+    }
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    color:'#fff',
+    color: '#fff',
     [theme.breakpoints.up('sm')]: {
       display: 'none',
     },
@@ -72,7 +80,7 @@ const styles = theme => ({
   headerLogo: {
     display: 'flex',
     textAlign: 'center',
-    flexDirection:'center',
+    flexDirection: 'center',
   },
 });
 
@@ -126,16 +134,16 @@ class ResponsiveDrawer extends React.Component {
         <List>
           <ResponsiveDrawerListItem
             to='/info'
-            onClick = {this.bandleCloseNav}
-            icon = {<InfoIcon/>}
+            onClick={this.bandleCloseNav}
+            icon={<InfoIcon />}
             text='aaa'
           />
         </List>
-       <List>
+        <List>
           <ResponsiveDrawerListItem
             to='/'
-            onClick = {this.bandleCloseNav}
-            icon = {<HomeIcon/>}
+            onClick={this.bandleCloseNav}
+            icon={<HomeIcon />}
             text='トップページ'
           />
         </List>
@@ -150,21 +158,21 @@ class ResponsiveDrawer extends React.Component {
         <List>
           <ResponsiveDrawerListItem
             to='/settings'
-            onClick = {this.bandleCloseNav}
-            icon={<SettingsIcon/>}
+            onClick={this.bandleCloseNav}
+            icon={<SettingsIcon />}
             text='設定'
           />
         </List>
       </div>
     );
-    
+
     {/*header記述 */ }
     return (
       <div className={classes.root}>
-        <CssBaseline /> {/*The rest of your application */ }
+        <CssBaseline /> {/*The rest of your application */}
         <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar className = {classes.toolBar}
-          variant = "dense" >
+          <Toolbar className={classes.toolBar}
+            variant="dense" >
             <IconButton
               color="inherit"
               aria-label="Open drawer"
@@ -176,7 +184,7 @@ class ResponsiveDrawer extends React.Component {
             </IconButton>
             <Link to="/">
               <Typography variant="h6" className={classes.headerLogo} noWrap>
-                タイトルタイトル
+                Murakami Folio
               </Typography>
             </Link>
           </Toolbar>

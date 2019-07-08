@@ -30,18 +30,37 @@ import { BrowserRouter as Router } from 'react-router-dom';
 // Material-UIテーマカスタマイズ
 const theme = createMuiTheme({
   palette: {
-    type: 'light', // light or dark
-    primary: grey, // primaryのカラー
-    secondary: blue, // secondaryのカラー
+    primary: {
+      light: '#69696a',
+      main: '#28282a',
+      dark: '#1e1e1f',
+    },
+    secondary: {
+      light: '#fff5f8',
+      main: '#ff3366',
+      dark: '#e62958',
+    },
+    warning: {
+      main: '#ffc071',
+      dark: '#ffb25e',
+    },
+  },
+  typography: {
+    fontFamily: 'Ubuntu, sans-serif',
+    fontSize: 14,
+    fontWeightLight: 300, // Work Sans
+    fontWeightRegular: 400, // Work Sans
+    fontWeightMedium: 700, // Roboto Condensed
+    fontFamilySecondary: 'Roboto Condensed, sans-serif',
   },
 });
 
 
 ReactDOM.render(
-    <MuiThemeProvider theme={theme} >
-      <Router>{/* このRouter（もしくはBrowserRouter）で囲む */}
-        <App />
-      </Router>
-    </MuiThemeProvider>
+  <MuiThemeProvider theme={theme} >
+    <Router>{/* このRouter（もしくはBrowserRouter）で囲む */}
+      <App />
+    </Router>
+  </MuiThemeProvider>
   , document.getElementById('root'));
 unregister();
